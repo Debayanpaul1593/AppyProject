@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {updateUsername, updatePassword} from '../actions/actionDefs';
 class LoginComponent extends Component {
   constructor() {
     super();
@@ -14,14 +16,16 @@ class LoginComponent extends Component {
           <TextInput
             mode="outlined"
             label="Username"
-            value={'text'}
+            value={this.props.username}
             style={{margin: 20, marginTop: 50}}
+            onChangeText={text => this.props.updateUsername(text)}
           />
           <TextInput
             mode="outlined"
             label="Password"
-            value={'text'}
+            value={this.props.password}
             style={{margin: 20}}
+            onChangeText={text => this.props.updatePassword(text)}
           />
         </View>
         <View
@@ -41,4 +45,17 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+const mapStateToProps = state => ({
+  username: state.flowReducer.username,
+  password: state.flowReducer.password,
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateUsername: username => dispatch(updateUsername(username)),
+  updatePassword: password => dispatch(updatePassword(password)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginComponent);
