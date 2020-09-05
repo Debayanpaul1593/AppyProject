@@ -26,19 +26,15 @@ class App extends Component {
           <Scene
             key="login"
             component={LoginComponent}
-            initial
             title={'Login'}
+            initial
           />
           <Scene
             key="empList"
             component={EmployeeListComponent}
             title={'Employee List'}
           />
-          <Scene
-            key="dashboard"
-            component={DashboardComponent}
-            title={'Dashboard'}
-          />
+          <Scene key="dashboard" component={DashboardComponent} />
         </Scene>
       </Router>
     );
